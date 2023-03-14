@@ -6,8 +6,6 @@ moving_average_points = {}
 simulation_tracker = {}
 
 # indicators
-
-
 def get_ma(data, length):
     values = []
     moving_average = []
@@ -22,13 +20,19 @@ def get_ma(data, length):
     return moving_average
 
     
-def get_history(symbol):
-    # Establish period and interval for how far back in time to go
-    p = '300m'
-    i = '1m'
+""" Get the history of a specified stock for a specified amount of time.
+For the "t" and "interval" arguments, can use:
+    'm' = minute
+    'd' = day
+    'mo' = month
+    'y' = year
 
-    # Get data
-    data = yf.Ticker(symbol).history(period=p, interval=i)
+:param symbl: Ticker symbol
+:param t: amount of time to go back. Default "1000m"
+:param interval: time between datapoints. Default "1m"
+"""
+def get_history(symbl: str, t: str="100m", interval: str="1m"):
+    data = yf.Ticker(symbl).history(period=t, interval=interval)
     return data["Close"]
 
 
